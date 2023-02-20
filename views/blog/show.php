@@ -1,7 +1,7 @@
 <h1><?= $params['post']->title ?></h1>
 <div>
     <?php foreach ($params['post']->getTags() as $tag): ?>
-        <span class="badge bg-secondary">
+        <span class="badge bg-primary">
             <a href="/PhpStorm/myapp/tags/<?= $tag->id ?>" class="text-white text-decoration-none"><?= $tag->name ?></a>
         </span>
     <?php endforeach; ?>
