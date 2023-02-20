@@ -8,6 +8,6 @@ class Tag extends Model
 
     public function getPosts()
     {
-        return $this->query("SELECT p.* FROM posts p INNER JOIN post_tag pt ON pt.post_id = p.id WHERE pt.tag_id = ?", $this->id);
+        return $this->query("SELECT p.* FROM posts p INNER JOIN post_tag pt ON pt.post_id = p.id WHERE pt.tag_id = ?", [$this->id]);
     }
 }

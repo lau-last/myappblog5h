@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
 use App\models\Post;
+use App\models\Tag;
 
 class PostController extends Controller
 {
@@ -17,7 +18,9 @@ class PostController extends Controller
     public function edit(int $id)
     {
         $post = (new Post($this->getDB()))->findById($id);
-        return $this->view('admin.post.edit', compact('post'));
+        $tags = (new Tag($this->getDB()))->all();
+
+        return $this->view('admin.post.edit', compact('post', 'tags'));
     }
 
     public function update($id)

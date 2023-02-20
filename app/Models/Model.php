@@ -36,8 +36,6 @@ abstract class Model
             $i++;
         }
 
-        var_dump($sqlRequestPart, $data);
-
         $data['id'] = $id;
 
         return $this->query("UPDATE {$this->table} SET {$sqlRequestPart} WHERE id = :id", $data);
@@ -65,12 +63,10 @@ abstract class Model
         $stmt = $this->db->getPDO()->$methode($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
 
-        if ($methode === 'query') {
-            return $stmt->$fetch();
-        } else {
+        if ($methode !== 'query') {
             $stmt->execute($param);
-            return $stmt->$fetch();
         }
+        return $stmt->$fetch();
 
 
     }
