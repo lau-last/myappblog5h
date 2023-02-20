@@ -15,12 +15,24 @@ class PostController extends Controller
         return $this->view('admin.post.index', compact('posts'));
     }
 
+    public function create()
+    {
+        $tags = (new Tag($this->getDB()))->all();
+
+        return $this->view('admin.post.form', compact('tags'));
+    }
+
+    public function createPost()
+    {
+
+    }
+
     public function edit(int $id)
     {
         $post = (new Post($this->getDB()))->findById($id);
         $tags = (new Tag($this->getDB()))->all();
 
-        return $this->view('admin.post.edit', compact('post', 'tags'));
+        return $this->view('admin.post.form', compact('post', 'tags'));
     }
 
     public function update($id)
@@ -31,7 +43,7 @@ class PostController extends Controller
 
         $result = $post->update($id, $_POST, $tags);
 
-        if($result){
+        if ($result) {
             return header("Location: /PhpStorm/myapp/admin/posts");
         }
     }
@@ -41,7 +53,7 @@ class PostController extends Controller
         $post = new Post($this->getDB());
         $result = $post->destroy($id);
 
-        if($result){
+        if ($result) {
             return header("Location: /PhpStorm/myapp/admin/posts");
         }
     }
