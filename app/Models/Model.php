@@ -25,7 +25,7 @@ abstract class Model
         return $this->query("SELECT * FROM {$this->table} WHERE id = ?", [$id], true);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, array $data, ?array $relations = null)
     {
         $sqlRequestPart = "";
         $i = 1;
@@ -51,7 +51,7 @@ abstract class Model
     {
         $methode = is_null($param) ? 'query' : 'prepare';
 
-        if (str_starts_with($sql, 'DELETE') || str_starts_with($sql, 'UPDATE') || str_starts_with($sql, 'CREATE')) {
+        if (str_starts_with($sql, 'DELETE') || str_starts_with($sql, 'UPDATE') || str_starts_with($sql, 'INSERT')) {
 
             $stmt = $this->db->getPDO()->$methode($sql);
             $stmt->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);

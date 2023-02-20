@@ -26,7 +26,10 @@ class PostController extends Controller
     public function update($id)
     {
         $post = new Post($this->getDB());
-        $result = $post->update($id, $_POST);
+
+        $tags = array_pop($_POST);
+
+        $result = $post->update($id, $_POST, $tags);
 
         if($result){
             return header("Location: /PhpStorm/myapp/admin/posts");
