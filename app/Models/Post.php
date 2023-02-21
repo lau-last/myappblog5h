@@ -31,6 +31,11 @@ HTML;
         return $this->query("SELECT t.* FROM tags t INNER JOIN post_tag pt ON pt.tag_id = t.id WHERE pt.post_id = ?", [$this->id]);
     }
 
+    public function create(array $data, ?array $relations = null)
+    {
+       parent::create($data, $relations);
+    }
+
     public function update(int $id, array $data, ?array $relations = null)
     {
         parent::update($id, $data);

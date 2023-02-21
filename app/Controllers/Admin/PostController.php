@@ -24,7 +24,15 @@ class PostController extends Controller
 
     public function createPost()
     {
+        $post = new Post($this->getDB());
 
+        $tags = array_pop($_POST);
+
+        $result = $post->create($_POST, $tags);
+
+        if ($result) {
+            return header("Location: /PhpStorm/myapp/admin/posts");
+        }
     }
 
     public function edit(int $id)
